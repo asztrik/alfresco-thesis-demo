@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Definition of new Model -->
+<model name="pres:tuwienmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+    <!-- Optional meta-data about the model -->
+    <description>Preservation Data Model</description>
+    <author>Asztrik Bakos</author>
+    <version>1.0</version>
+    <!--language>en-US</language--> <!-- test for inserting custom metadata -->
+
+    <!-- Imports are required to allow references to definitions in other models -->
+    <imports>
+        <!-- Import Alfresco Dictionary Definitions -->
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+    </imports>
+
+    <!-- Introduction of new namespaces defined by this model -->
+    <namespaces>
+        <namespace uri="http://pres-demo.tuwien.ac.at/model/content/1.0" prefix="pres" />
+    </namespaces>
+
+
+    <types>
+        <!-- Enterprise-wide generic document type -->
+        <type name="pres:dataObject" >
+            <title>DataObject</title>
+            <parent>cm:content</parent>
+            <properties>
+                <property name="pres:id">
+                    <type>d:text</type>
+                </property>
+                <property name="pres:type">
+                    <type>d:text</type>
+                </property>
+                <property name="pres:date">
+                    <type>d:date</type>
+                </property>
+                <property name="pres:description">
+                    <type>d:text</type>
+                </property>
+                <property name="pres:format">
+                    <type>d:text</type>
+                </property>
+                <property name="pres:digestAlg">
+                    <type>d:text</type>
+                </property>                
+                <property name="pres:digest">
+                    <type>d:text</type>
+                </property>                
+                <property name="pres:conforms_to">
+                    <type>d:text</type>
+                </property>
+                <property name="pres:license">
+                    <type>d:text</type>
+                </property> 
+                <property name="pres:restriction">
+                    <type>d:boolean</type>
+                </property>    
+                <property name="cm:from">
+                    <type>d:date</type>
+                </property>
+                <property name="cm:to">
+                    <type>d:date</type>
+                </property> 
+            </properties>
+            <associations>
+                <association name="pres:derivedFrom">
+                    <title>Derived From - Object</title>
+                    <source>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </source>
+                    <target>
+                        <class>pres:dataObject</class>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </target>
+                </association>
+            </associations>
+        </type>
+
+    </types>
+
+</model>

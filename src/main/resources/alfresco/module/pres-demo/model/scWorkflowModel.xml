@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Definition of new Model -->
+<model name="dpwf:workflowmodel"
+    xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+    <!-- Optional meta-data about the model -->
+    <description>Preservation Demo Workflow Model</description>
+    <author>Asztrik Bakos</author>
+    <version>1.0</version>
+
+    <!-- Imports are required to allow references to definitions in other models -->
+    <imports>
+        <import uri="http://www.alfresco.org/model/dictionary/1.0"
+            prefix="d" />
+        <import uri="http://www.alfresco.org/model/bpm/1.0"
+            prefix="bpm" />
+    </imports>
+
+    <!-- Introduction of new namespaces defined by this model -->
+    <namespaces>
+        <namespace uri="http://www.tuwien.ac.at/model/workflow/1.0"
+            prefix="dpwf" />
+    </namespaces>
+
+    <types>
+        <type name="dpwf:selectLicense">
+        	<parent>bpm:workflowTask</parent>
+        	<properties>
+        		 <property name="dpwf:licenseField">
+        		 <title>License</title>
+        		 <type>d:text</type>
+        		 <default>none</default>
+	        		 <constraints>
+		        		 <constraint type="LIST">
+		        		 	<parameter name="allowedValues">
+		        		 		<list>
+		        		 			<value>http://creativecommons.org/licenses/by/3.0/</value>
+		        		 			<value>http://www.gnu.org/licenses/gpl.html</value>
+		        		 			<value>none</value>
+		        		 		</list>
+		        		 	</parameter>	
+		        		 </constraint>
+	        		 </constraints>
+        		 </property>
+        	</properties>
+        </type>
+    </types>
+
+</model>

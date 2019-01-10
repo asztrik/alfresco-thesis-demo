@@ -1,0 +1,29 @@
+<alfresco-config>
+    <config evaluator="string-compare" condition="activiti$presDemoTest">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="bpm:workflowDescription" />
+               <show id="packageItems" />
+               <show id="scwf:helloName" />
+               <show id="transitions" />
+               <show id="bpm:status" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="progress" appearance="title" label-id="workflow.set.task.progress" />
+               <set id="other" appearance="title" label-id="workflow.set.other" />
+               <field id="bpm:workflowDescription" label-id="workflow.field.message">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                     <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="packageItems" set="items" />
+               <field id="scwf:helloName" set="other" />
+               <field id="bpm:status" set="progress" />
+            </appearance>
+         </form>
+      </forms>
+    </config>
+</alfresco-config>

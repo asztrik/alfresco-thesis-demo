@@ -1,0 +1,154 @@
+{
+   "header":{
+      "@context":{
+         "dmp":"http://purl.org/madmps#",
+         "foaf":"http://xmlns.com/foaf/0.1/",
+         "dc":"http://purl.org/dc/elements/1.1/",
+         "dcterms":"http://purl.org/dc/terms/",
+         "premis":"http://www.loc.gov/premis/rdf/v1#",
+         "bpmn":"http://dkm.fbk.eu/index.php/BPMN2_Ontology",
+         "fs":"http://www.invincea.com/ontologies/icas/1.0/filesystem"
+      },
+      "@id":"http://example.org/dmp/madmp-proto",
+      "@type":"dmp:DataManagementPlan",
+      "dcterms:title":"Sample Machine Actionable DMP",
+      "dcterms:description":"This sample DMP shows the parts of a MADMP containing a process definition",
+      "dc:creator":[
+         {
+            "@id":"orcid.org/0000-1111-2222-3333",
+            "foaf:name":"Asztrik Bakos",
+            "foaf:mbox":"mailto:e1527997@student.tuwien.ac.at"
+         }
+      ],
+      "dcterms:hasVersion":"v1.0.2",
+      "dc:date":"2017-06-06"
+   },
+   
+
+   
+   "dmp:hasDataObject":[
+      {
+         "@id":"123",
+         "@type":"dmp:File",
+         "dmp:hasPreservation": "default_process",
+		 
+		 ## File 123 has information on metadata. This metadata is described using RDA-Metadata-Default standard. This standard says that the next things to parse are dcterms:description and premis:....
+		 
+         "dmp:hasMetadata":{
+			dmp:hasDomainSpecificExtension" : "RDA-Metadata-Default"
+        
+			"dcterms:description":"Research Data File 1",
+            "premis:hasObjectCharacteristics":{
+               "premis:hasFormat":"premis:Format:zip",
+               "premis:fixity":{
+                  "premis:hasMessageDigestAlgorithm":"premis:Fixity:MD5",
+                  "premis:messageDigest":"936736efd66ba592596e55f93351a1e6"
+               }
+            },
+		}
+		
+		## File 123 has information on its size. This is decribed using RDA-DataVolume-Default standard. For this reason I expect only one field that follows fs...
+
+		"dmp:hasDataVolume" : {
+			"dmp:hasDomainSpecificExtension" : "RDA-DataVolume-Default",
+			
+			"fs:fileSize" : 4096
+		},
+		
+		"dmp:hasLicense" : {
+		    "dmp:hasDomainSpecificExtension" : "RDA-License-Default",
+
+			"premis:hasRestriction":"no",
+            "premis:hasLicenseTerms":"http://creativecommons.org/licenses/by/3.0/",
+            "premis:hasEndDate":"01-01-2020"
+		}
+
+        
+      },
+   ],
+   
+   ## DMP describes a preservation process that WAS executed on SOME data objects.
+   ## This process is described using RDA-Preservation-Default standard. Hence I expect BPMN description.
+   
+   "dmp:Preservation":{
+		"dmp:hasDomainSpecificExtension" : "RDA-Preservation-Default",
+		
+		"@id":"default_process",
+		"dc:description":{
+			"numOfProcessedFiles":"2",
+			"status":"running"
+      },
+      "bpmn:definitions":{
+         "bpmn:id":"Sample Process",
+         "bpmn:targetNamespace":"http://bpmn.io/schema/bpmn",
+         "bpmn:process":[
+            {
+               "bpmn:startEvent":{
+                  "bpmn:id":"StartEvent_1",
+                  "bpmn:name":"upload",
+                  "bpmn:outgoing":"SequenceFlow_1uwrg61"
+               }
+            },
+            {
+               "bpmn:task":{
+                  "bpmn:id":"Task_1ch8o48",
+                  "bpmn:name":"transfer",
+                  "bpmn:incoming":"SequenceFlow_1uwrg61",
+                  "bpmn:outgoing":"SequenceFlow_04lr1q2"
+               }
+            },
+            {
+               "bpmn:sequenceFlow":{
+                  "bpmn:id":"SequenceFlow_1uwrg61",
+                  "bpmn:sourceRef":"StartEvent_1",
+                  "bpmn:targetRef":"Task_1ch8o48"
+               }
+            },
+            {
+               "bpmn:task":{
+                  "bpmn:id":"Task_1wd9pju",
+                  "bpmn:name":"ingest",
+                  "bpmn:incoming":"SequenceFlow_04lr1q2",
+                  "bpmn:outgoing":"SequenceFlow_1pqpt5j"
+               }
+            },
+            {
+               "bpmn:sequenceFlow":{
+                  "bpmn:id":"SequenceFlow_04lr1q2",
+                  "bpmn:sourceRef":"Task_1ch8o48",
+                  "bpmn:targetRef":"Task_1wd9pju"
+               }
+            },
+            {
+               "bpmn:task":{
+                  "bpmn:id":"Task_13xk4nb",
+                  "bpmn:name":"convert",
+                  "bpmn:incoming":"SequenceFlow_1pqpt5j",
+                  "bpmn:outgoing":"SequenceFlow_1w3nfg6"
+               }
+            },
+            {
+               "bpmn:sequenceFlow":{
+                  "bpmn:id":"SequenceFlow_1pqpt5j",
+                  "bpmn:sourceRef":"Task_1wd9pju",
+                  "bpmn:targetRef":"Task_13xk4nb"
+               }
+            },
+            {
+               "bpmn:endEvent":{
+                  "bpmn:id":"EndEvent_1mr1wx3",
+                  "bpmn:name":"archive",
+                  "bpmn:incoming":"SequenceFlow_1w3nfg6"
+               }
+            },
+            {
+               "bpmn:sequenceFlow":{
+                  "bpmn:id":"SequenceFlow_1w3nfg6",
+                  "bpmn:sourceRef":"Task_13xk4nb",
+                  "bpmn:targetRef":"EndEvent_1mr1wx3"
+               }
+            }
+         ]
+      }
+   }
+}

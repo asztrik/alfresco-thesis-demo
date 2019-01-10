@@ -1,0 +1,314 @@
+<alfresco-config>
+    <!-- Document Library config section -->
+    <config evaluator="string-compare" condition="DocumentLibrary">
+    	<aspects>
+			<visible>
+				<aspect name="cm:versionable" />
+				<aspect name="cm:effectivity" />
+				<aspect name="cm:summarizable" />
+			</visible>
+			<!-- Aspects that a user can add. Same as "visible" if left empty -->
+            <addable>
+            </addable>
+
+            <!-- Aspects that a user can remove. Same as "visible" if left empty -->
+            <removeable>
+            </removeable>
+		</aspects>
+
+		<types>
+		    <type name="cm:content">
+		        <subtype name="pres:dataObject" />
+		    </type>
+		    <type name="pres:dataObject">
+		    </type>
+		</types>
+		
+
+		
+    </config>
+    
+    
+    <config evaluator="string-compare" condition="DocLibActions">
+    <actions>
+        <action id="external-tool" type="link" label="action.cm_versionable.name">
+
+        </action>
+      </actions>
+    </config>
+    
+    
+    <!-- cm:content type (existing nodes) -->
+   <config evaluator="node-type" condition="pres:dataObject">
+      <forms>
+         <!-- Default form configuration for the cm:content type -->
+         <form>
+            <field-visibility>
+               <show id="pres:id" />
+               <show id="pres:type" />
+               <show id="pres:description" />
+               <show id="pres:date" />
+               <show id="pres:derivedFrom" />
+               <show id="pres:license" />
+               <show id="pres:format" />
+               <show id="pres:digestAlgorithm" />
+               <show id="pres:digest" />
+               <show id="pres:conformsTo" />
+               
+               <!-- dataVolume -->
+               <show id="cm:size" />
+               
+               <show id="pres:restriction" />
+
+			   <!-- cm:versionable aspect modeling hasVersion -->
+               <show id="cm:versionLabel" />
+               <show id="cm:versionType" />
+               
+               <!-- cm:effectivity aspect modeling endDate -->
+               <show id="cm:from"/>
+               <show id="cm:to"/>
+               
+               <!-- cm:summarizable -->
+               <show id="cm:summary"/>
+                              
+            </field-visibility>
+            <appearance>
+            
+            
+	            <field id="pres:id" label-id="prop.pres_id">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            <field id="pres:type" label-id="prop.pres_type">
+	             	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            <field id="pres:description" label-id="prop.pres_description">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>	            
+	            <field id="pres:date" label-id="prop.pres_date">
+	            	<control template="/org/alfresco/components/form/controls/date.ftl" />
+	            </field>	                       
+	            <field id="pres:format" label-id="prop.pres_format">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            <field id="pres:digestAlgorithm" label-id="prop.pres_digestAlg">
+	             	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            <field id="pres:digest" label-id="prop.pres_digest">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>	
+	            <field id="pres:conformsTo" label-id="prop.pres_conforms_to">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            <field id="pres:license" label-id="prop.pres_license">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            <field id="pres:restriction" label-id="prop.pres_restriction">
+	            	<control template="/org/alfresco/components/form/controls/checkbox.ftl" />
+	            </field>
+	            
+				<field id="pres:derivedFrom" label-id="assoc.pres_derivedFrom" />	                             
+	                             
+	            <set id="cm:content2cols" template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                <field set="cm:content2cols" id="cm:size" read-only="true">
+                   <control template="/org/alfresco/components/form/controls/size.ftl" />
+                </field>
+               
+                <field id="cm:versionLabel" label-id="prop.pres_verLabel">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+                <field id="cm:versionType" label-id="prop.pres_verType">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>	            
+               
+               
+                <field id="cm:from" label-id="prop.pres_rest_from">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+                <field id="cm:to" label-id="prop.pres_rest_to">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            <field id="cm:summary" label-id="assoc.sc_summary"	/>               
+            </appearance>
+         </form>
+
+         <!-- Document Library pop-up Edit Metadata form -->
+         <form id="doclib-simple-metadata">
+      <field-visibility>
+               <show id="pres:id" />
+               <show id="pres:type" />
+               <show id="pres:description" />
+               <show id="pres:date" />
+               <show id="pres:derivedFrom" />
+               <show id="pres:format" />
+               <show id="pres:digestAlgorithm" />
+               <show id="pres:digest" />
+               <show id="pres:conformsTo" />
+               
+               <!-- dataVolume -->
+               <show id="cm:size" />
+               
+               <show id="pres:restriction" />
+
+			   <!-- cm:versionable aspect modeling hasVersion -->
+               <show id="cm:versionLabel" />
+               <show id="cm:versionType" />
+               
+               <!-- cm:effectivity aspect modeling endDate -->
+               <show id="cm:from"/>
+               <show id="cm:to"/>
+               
+               <show id="cm:versionable" />
+			   <show id="cm:effectivity" />
+			   <show id="cm:summarizable" />
+            </field-visibility>
+            <appearance>
+            
+            
+	            <field id="pres:id" label-id="prop.sc_id">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            <field id="pres:type" label-id="prop.sc_type">
+	             	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            <field id="pres:description" label-id="prop.sc_description">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>	            
+	            <field id="pres:date" label-id="prop.sc_date">
+	            	<control template="/org/alfresco/components/form/controls/date.ftl" />
+	            </field>	                       
+	            <field id="pres:format" label-id="prop.sc_format">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            <field id="pres:digestAlgorithm" label-id="prop.sc_digestAlg">
+	             	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            <field id="pres:digest" label-id="prop.sc_digest">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>	
+	            <field id="pres:conformsTo" label-id="prop.sc_conforms_to">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            <field id="pres:restriction" label-id="prop.sc_restriction">
+	            	<control template="/org/alfresco/components/form/controls/checkbox.ftl" />
+	            </field>
+	            
+				<field id="pres:derivedFrom" label-id="assoc.sc_derivedFrom" read-only="true">	                             
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+	            	                             
+	            <set id="cm:content2cols" template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                <field set="cm:content2cols" id="cm:size" read-only="true">
+                   <control template="/org/alfresco/components/form/controls/size.ftl" />
+                </field>
+               
+                <field id="cm:versionLabel" label-id="prop.sc_verLabel">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>
+                <field id="cm:versionType" label-id="prop.sc_verType">
+	            	<control template="/org/alfresco/components/form/controls/textfield.ftl" />
+	            </field>	            
+               
+               
+                <field id="cm:from" label-id="prop.sc_rest_from">
+	            	<control template="/org/alfresco/components/form/controls/date.ftl" />
+	            </field>
+                <field id="cm:to" label-id="prop.sc_rest_to">
+	            	<control template="/org/alfresco/components/form/controls/date.ftl" />
+	            </field>	 
+	            
+	           <field id="cm:versionable" label-id="assoc.cm_replaces"/>
+			   <field id="cm:effectivity" />
+			   <field id="cm:summarizable" />
+	                          
+            </appearance>
+         </form>
+         
+         <!-- Document Library Inline Edit form -->
+         <form id="doclib-inline-edit">
+            <field-visibility>
+               <show id="cm:name" />
+               <show id="cm:content" force="true" />
+               <show id="cm:title" force="true" />
+               <show id="cm:description" force="true" />
+            </field-visibility>
+            <appearance>
+               <field id="cm:name">
+                 <control>
+                    <control-param name="maxLength">255</control-param>
+                 </control>
+               </field>
+               <field id="cm:title">
+                  <control template="/org/alfresco/components/form/controls/textfield.ftl" />
+               </field>
+               <field id="cm:content" label-id="">
+                  <control>
+                     <control-param name="editorAppearance">explorer</control-param>
+                     <control-param name="forceEditor">true</control-param>
+                  </control>
+               </field>
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="string-compare" condition="dpwf:submitPresDemoTask">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="pres:descripton" />
+            </field-visibility>
+            <appearance>
+                <show id="pres:descripton" />
+            </appearance>
+         </form>
+      </forms>   
+   </config>
+   
+   <config evaluator="task-type" condition="activiti$presDemo">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="dpwf:licenseField" />
+            </field-visibility>
+            <appearance>
+               <field id="dpwf:licenseField" />
+            </appearance>
+         </form>
+      </forms>
+    </config>
+    
+
+    <config evaluator="task-type" condition="dpwf:submitPresDemoTask">
+      <forms>
+         <form id="workflow-details">
+            <field-visibility>
+               <show id="bpm:workflowDescription" />
+               <show id="packageItems" />
+               <show id="dpwf:licenseField" />
+               <show id="transitions" />
+               <show id="bpm:status" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+ 			   <set id="progress" appearance="title" label-id="workflow.set.task.progress" />               
+               <set id="other" appearance="title" label-id="workflow.set.other" />
+               
+               <field id="bpm:workflowDescription" label-id="workflow.field.message">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                     <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="packageItems" set="items" />
+               <field id="dpwf:licenseField" set="other" />
+               <field id="bpm:status" set="progress" />               
+            </appearance>
+         </form>
+      </forms>
+</config>    
+    
+    
+    
+</alfresco-config>

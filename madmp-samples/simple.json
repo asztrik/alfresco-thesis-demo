@@ -1,0 +1,40 @@
+{
+ "header": {
+	"@context": {
+		"dmp": "http://purl.org/madmps#",
+		"dc": "http://purl.org/dc/elements/1.1/",
+		"prov": "http://www.w3.org/ns/prov#",
+	},
+	"@id": "http://example.org/dmp/madmp-proto",
+	"@type": "dmp:DataManagementPlan",
+	"dcterms:title": "Sample Machine Actionable DMP",
+	"dcterms:description": "Sample MADMP",
+	"dc:creator": [{
+		"@id": "orcid.org/0000-1111-2222-3333",
+		"foaf:name": "Asztrik Bakos",
+		"foaf:mbox": "mailto:author@uni.ac.at"
+	}],
+	"dcterms:hasVersion": "v1.0.2",
+	"dc:date": "2017-07-31"
+ },
+ "dmp:hasDataObject": [{
+	"@id": "123",
+	"@type": "dmp:File",
+	"dc:date": "2017-07-11",
+	"dcterms:hasVersion": "1.0",
+	"prov:wasDerivedFrom": {
+		"dmp:DataObject": {
+			"@id": "122"
+		}
+	},
+	"dmp:hasMetadata": {
+		"dmp:hasDomainSpecificExtension": "PROV",
+		"dcterms:description": "File 1",
+		"prov:hasSpecialStandard": "dbo:UHDTV",
+	},
+	"premis:hasRestriction": "no",
+	"dmp:hasLicense": {
+		"premis:hasLicenseTerms": "CC-BY-3.0"
+	}
+ }]
+}
